@@ -1,0 +1,197 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Customer profile with shipping and contact information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "houseNumber": { "type": "string", "maxLength": 100 },
+        "street": { "type": "string", "maxLength": 200 },
+        "area": { "type": "string", "maxLength": 150 },
+        "landmark": { "type": "string", "maxLength": 150 },
+        "city": { "type": "string", "maxLength": 100 },
+        "state": { "type": "string", "maxLength": 100 },
+        "pincode": { "type": "string", "maxLength": 10 },
+        "deliveryDetailsCompleted": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "WishlistItem": {
+      "title": "WishlistItem",
+      "description": "Product saved to customer personal wishlist",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "productId": { "type": "string", "maxLength": 128 },
+        "productName": { "type": "string", "maxLength": 150 },
+        "productPrice": { "type": "number" },
+        "productImage": { "type": "string", "maxLength": 500 },
+        "productCategory": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "productId"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Handmade crochet product in store catalogue",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "price": { "type": "number" },
+        "discountPrice": { "type": "number" },
+        "category": { "type": "string", "maxLength": 100 },
+        "images": { "type": "array" },
+        "colors": { "type": "array" },
+        "variations": { "type": "array" },
+        "stock": { "type": "number" },
+        "sku": { "type": "string", "maxLength": 50 },
+        "isActive": { "type": "boolean" },
+        "isFeatured": { "type": "boolean" },
+        "customizationAvailable": { "type": "boolean" },
+        "customizationInstructions": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "price", "category", "stock"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product categorization",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "name": { "type": "string", "maxLength": 100 },
+        "slug": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 300 },
+        "imageUrl": { "type": "string", "maxLength": 500 },
+        "order": { "type": "number" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with items, shipping, and payment status",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string", "maxLength": 150 },
+        "customerPhone": { "type": "string", "maxLength": 20 },
+        "shippingAddress": { "type": "object" },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingFee": { "type": "number" },
+        "discount": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 10 },
+        "paymentStatus": { "type": "string", "maxLength": 30 },
+        "orderStatus": { "type": "string", "maxLength": 30 },
+        "razorpayOrderId": { "type": "string", "maxLength": 100 },
+        "razorpayPaymentId": { "type": "string", "maxLength": 100 },
+        "trackingNumber": { "type": "string", "maxLength": 100 },
+        "courierPartner": { "type": "string", "maxLength": 100 },
+        "deliveryInstructions": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["orderId", "userId", "customerEmail", "items", "totalAmount", "orderStatus", "paymentStatus"]
+    },
+    "CustomOrderRequest": {
+      "title": "CustomOrderRequest",
+      "description": "Custom personalized crochet item inquiry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string", "maxLength": 150 },
+        "customerPhone": { "type": "string", "maxLength": 20 },
+        "productIdea": { "type": "string", "maxLength": 1000 },
+        "preferredColors": { "type": "string", "maxLength": 200 },
+        "approximateSize": { "type": "string", "maxLength": 100 },
+        "quantity": { "type": "number" },
+        "requiredByDate": { "type": "string", "maxLength": 50 },
+        "referenceImageUrl": { "type": "string", "maxLength": 500 },
+        "additionalNotes": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "maxLength": 30 },
+        "quotedPrice": { "type": "number" },
+        "adminNotes": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "customerName", "customerEmail", "productIdea", "status"]
+    },
+    "StoreSettings": {
+      "title": "StoreSettings",
+      "description": "Global store settings and policies",
+      "type": "object",
+      "properties": {
+        "storeName": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "announcement": { "type": "string", "maxLength": 300 },
+        "contactEmail": { "type": "string", "maxLength": 150 },
+        "contactPhone": { "type": "string", "maxLength": 30 },
+        "instagramHandle": { "type": "string", "maxLength": 100 },
+        "standardShippingFee": { "type": "number" },
+        "freeShippingThreshold": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Designated administrators allowed to manage store operations",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "maxLength": 50 },
+        "addedAt": { "type": "string" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Customer profiles restricted to profile owners and administrators"
+    },
+    "/users/{userId}/wishlist/{wishlistId}": {
+      "schema": { "$ref": "WishlistItem" },
+      "description": "Personal wishlist items owned by the authenticated customer"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "Product" },
+      "description": "Product catalog accessible to public read and admin modifications"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "Category" },
+      "description": "Product categories list with public read and admin write"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "Order" },
+      "description": "Store orders readable by purchasing customer and administrator"
+    },
+    "/customOrderRequests/{requestId}": {
+      "schema": { "$ref": "CustomOrderRequest" },
+      "description": "Custom crochet commission requests submitted by customers"
+    },
+    "/storeSettings/{settingId}": {
+      "schema": { "$ref": "StoreSettings" },
+      "description": "Store configuration and delivery policy parameters"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "Admin" },
+      "description": "Authorized administrator records"
+    }
+  }
+}
